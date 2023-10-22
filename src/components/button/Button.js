@@ -7,6 +7,7 @@ export const Button = ({ text, type, onClick, longButton = false }) => {
       type={type}
       onClick={onClick}
       // longButton={longButton ? true : false}
+      style={{width:longButton?'100%':''}}
     >
       {text}
     </button>

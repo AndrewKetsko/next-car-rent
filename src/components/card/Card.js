@@ -4,7 +4,7 @@ import styles from "./card.module.css";
 import Image from "next/image";
 import Heart from "@/images/heart.svg";
 import ActiveHeart from "@/images/active.svg";
-import { Button } from "../button/Button";
+import { Button } from "../Button/Button";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -50,7 +50,7 @@ export const Card = ({ item, favorite, handleFavorite }) => {
         onClick={() => handleFavorite(id)}
       />
 
-      <Image alt="auto" src={img || photoLink} height="274" width="150"></Image>
+      <Image alt="auto" src={img || photoLink} height="200" width="274"></Image>
 
       <p className={styles.header}>
         {make}
@@ -75,13 +75,14 @@ export const Card = ({ item, favorite, handleFavorite }) => {
           </span>
         ))}
       </div>
-      <Link href={`${pathname}/${id}`}>LINK</Link>
-      <Button
-        type={"button"}
-        text={"Learn more"}
-        // onClick={router.push(`${pathname}/${id}`)}
-        // longButton
-      />
+      <Link href={`${pathname}/${id}`}>
+        <Button
+          type={"button"}
+          text={"Learn more"}
+          // onClick={router.push(`${pathname}/${id}`)}
+          longButton
+        />
+      </Link>
       {/* {isOpen && <Modal onClose={closeModal} item={item} />} */}
     </li>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import X from "@/images/x.svg";
-import { Button } from "../button/Button";
+import { Button } from "../Button/Button";
 import styled from "./carInfoModal.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -34,10 +34,10 @@ export const CarInfoModal = ({ item }) => {
         className={styled.closeicon}
         alt="X"
         src={X}
-        onClick={()=>router.back()}
+        onClick={() => router.back()}
       />
 
-      <Image alt={model} src={img || photoLink} width={300} height={200}/>
+      <Image alt={model} src={img || photoLink} width={300} height={200} />
 
       <p className={styled.header}>
         {make}

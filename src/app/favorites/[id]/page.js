@@ -1,4 +1,4 @@
-import { CarInfoModal } from "@/components/carInfoModal/CarInfoModal";
+import { CarInfoModal } from "@/components/CarInfoModal/CarInfoModal";
 import { fetchData } from "@/fetch/fetch";
 
 export default async function CarPage({ params }) {

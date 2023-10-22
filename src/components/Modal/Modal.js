@@ -2,9 +2,9 @@
 
 import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
-import styles from './modalframe.module.css';
+import styles from './modal.module.css';
 
-export default function ModalFrame({ children }) {
+export default function Modal({ children }) {
   const overlay = useRef(null);
   const wrapper = useRef(null);
   const router = useRouter();

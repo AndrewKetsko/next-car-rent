@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/button/Button";
+import { Button } from "@/components/Button/Button";
 import {
   carMakesList,
   favoriteCars,
   // priceRangeCurrentOnly,
   priceRangePer10,
 } from "@/filters/filters";
-import { Select } from "@/components/select/Select";
+import { Select } from "@/components/Select/Select";
 import styles from "./form.module.css";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";

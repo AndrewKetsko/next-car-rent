@@ -1,4 +1,4 @@
-import { Form } from "@/components/search-form/Form";
+import { Form } from "@/components/Search-form/Form";
 import { fetchData } from "@/fetch/fetch";
 
 export default async function FavoriteLayout({ children }) {

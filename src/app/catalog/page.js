@@ -1,4 +1,4 @@
-import { Catalog } from "@/components/catalog/Catalog";
+import { Catalog } from "@/components/Catalog/Catalog";
 import { fetchData } from "@/fetch/fetch";
 
 export default async function CatalogPage({ searchParams }) {

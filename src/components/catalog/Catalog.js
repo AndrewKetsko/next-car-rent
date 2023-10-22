@@ -2,7 +2,7 @@
 
 import styles from "./catalog.module.css";
 
-import { Card } from "../card/Card";
+import { Card } from "../Card/Card";
 import { useEffect, useState } from "react";
 import { favoriteCars, filteredCars } from "@/filters/filters";
 import Link from "next/link";
@@ -11,11 +11,11 @@ import { usePathname } from "next/navigation";
 export const Catalog = ({ filter, data }) => {
   const pathname = usePathname();
   const favorite = [];
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [pathname]);
+  // useEffect(() => {
+  //   setCurrentPage(1);
+  // }, [pathname]);
 
   const filteredData = filteredCars(data, filter);
 
@@ -24,26 +24,28 @@ export const Catalog = ({ filter, data }) => {
     : favoriteCars(filteredData, favorite);
 
   const pages = Math.ceil(favoriteData?.length / 8);
-  const renderData = favoriteData?.slice(0, currentPage * 8);
+  // const renderData = favoriteData?.slice(0, currentPage * 8);
 
   const handleFavorite = (id) => {
     dispatch(favorite.includes(id) ? delFavorite(id) : setFavorite(id));
   };
 
-  const handleMore = (e) => {
-    setCurrentPage((prev) => prev + 1);
-  };
+  // const handleMore = (e) => {
+  //   setCurrentPage((prev) => prev + 1);
+  // };
 
   return (
     <>
-      {renderData?.length === 0 ? (
+      {favoriteData?.length === 0 ? (
         <div>
           <div className={styles.flexdiv}>
             Your favorite list is empty or current search returns nothing.
             Select some favorite cars from
           </div>
           <div className={styles.flexdiv}>
-            <Link className={styles.link} href={"/catalog"}>CATALOG</Link>
+            <Link className={styles.link} href={"/catalog"}>
+              CATALOG
+            </Link>
           </div>{" "}
           <div className={styles.flexdiv}>
             or change your search parameters.
@@ -51,7 +53,7 @@ export const Catalog = ({ filter, data }) => {
         </div>
       ) : (
         <ul className={styles.container}>
-          {renderData?.map((item) => (
+          {favoriteData?.map((item) => (
             <Card
               key={item.id}
               item={item}
@@ -61,7 +63,7 @@ export const Catalog = ({ filter, data }) => {
           ))}
         </ul>
       )}
-
+{/* 
       {pages > currentPage && (
         <div className={styles.flexdiv}>
           <button
@@ -72,7 +74,7 @@ export const Catalog = ({ filter, data }) => {
             Load more
           </button>
         </div>
-      )}
+      )} */}
     </>
   );
 };
