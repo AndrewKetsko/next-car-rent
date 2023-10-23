@@ -27,3 +27,14 @@
   border-right: 1px solid;
   margin: 0 5px;
 }
+
+.icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  cursor: pointer;
+}
+.icon:hover,
+.icon:focus {
+  transform: scale(1.2);
+}

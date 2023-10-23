@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import styles from "./catalog.module.css";
 
@@ -7,10 +7,12 @@ import { useEffect, useState } from "react";
 import { favoriteCars, filteredCars } from "@/filters/filters";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const Catalog = ({ filter, data }) => {
   const pathname = usePathname();
-  const favorite = [];
+  const router = useRouter();
+  const favorite = JSON.parse(localStorage.getItem("favorite")) || [];
   // const [currentPage, setCurrentPage] = useState(1);
 
   // useEffect(() => {
@@ -27,7 +29,13 @@ export const Catalog = ({ filter, data }) => {
   // const renderData = favoriteData?.slice(0, currentPage * 8);
 
   const handleFavorite = (id) => {
-    dispatch(favorite.includes(id) ? delFavorite(id) : setFavorite(id));
+    if (favorite.includes(id)) {
+      favorite.splice(favorite.indexOf(id), 1);
+    } else {
+      favorite.push(id);
+    }
+    localStorage.setItem("favorite", JSON.stringify(favorite));
+    router.refresh();
   };
 
   // const handleMore = (e) => {
@@ -63,7 +71,7 @@ export const Catalog = ({ filter, data }) => {
           ))}
         </ul>
       )}
-{/* 
+      {/* 
       {pages > currentPage && (
         <div className={styles.flexdiv}>
           <button

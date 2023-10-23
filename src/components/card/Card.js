@@ -39,12 +39,9 @@ export const Card = ({ item, favorite, handleFavorite }) => {
     functionalities,
   } = item;
 
-  // console.log(pathname);
-  // console.log(`${pathname}/${id}`);
-
   return (
     <li className={styles.styledli}>
-      <Image
+      <Image className={styles.icon}
         alt="heart"
         src={favorite?.includes(id) ? ActiveHeart : Heart}
         onClick={() => handleFavorite(id)}
