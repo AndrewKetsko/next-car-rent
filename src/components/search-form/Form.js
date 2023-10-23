@@ -37,12 +37,6 @@ export const Form = ({ data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const filter = {
-      brand: model,
-      price,
-      from,
-      to,
-    };
     router.push(
       `${pathname}?brand=${model}&price=${price}&from=${from}&to=${to}`
     );

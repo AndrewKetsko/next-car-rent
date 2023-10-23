@@ -1,10 +1,9 @@
 import { CarInfoModal } from "@/components/CarInfoModal/CarInfoModal";
 import Modal from "@/components/Modal/Modal";
-import { fetchData } from "@/fetch/fetch";
+import { findedCar } from "@/filters/filters";
 
 export default async function CarModal({ params }) {
-  const items = await fetchData();
-  const item = items.find((item) => item.id === +params.id);
+  const item = await findedCar(params.id);
   return (
     <Modal>
       <CarInfoModal item={item} />

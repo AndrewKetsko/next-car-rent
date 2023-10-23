@@ -1,14 +1,6 @@
-.closeicon {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 24px;
-  height: 24px;
-}
-.closeicon:hover,
-.closeicon:focus {
-  transform: scale(1.2);
-  cursor: pointer;
+.container {
+  width: 500px;
+  padding: 50px;
 }
 
 .header {

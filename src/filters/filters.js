@@ -1,3 +1,10 @@
+import { fetchData } from "@/fetch/fetch";
+
+export const findedCar = async (id) => {
+  const cars = await fetchData();
+  return cars.find(car => car.id === +id);
+}
+
 export const filteredCars = (data, filter) => {
   const { brand = "", price = "", from = "", to = "" } = filter;
 

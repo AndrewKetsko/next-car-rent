@@ -3,6 +3,8 @@
 import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
 import styles from './modal.module.css';
+import X from "@/images/x.svg";
+import Image from "next/image";
 
 export default function Modal({ children }) {
   const overlay = useRef(null);
@@ -37,6 +39,12 @@ export default function Modal({ children }) {
   return (
     <div ref={overlay} className={styles.overlay} onClick={onClick}>
       <div ref={wrapper} className={styles.wrapper}>
+        <Image
+          className={styles.closeicon}
+          alt="X"
+          src={X}
+          onClick={() => router.back()}
+        />
         {children}
       </div>
     </div>

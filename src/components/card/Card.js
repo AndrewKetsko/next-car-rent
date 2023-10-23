@@ -1,29 +1,13 @@
-// 'use client'
-
 import styles from "./card.module.css";
 import Image from "next/image";
 import Heart from "@/images/heart.svg";
 import ActiveHeart from "@/images/active.svg";
 import { Button } from "../Button/Button";
-import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-// import { Modal } from "../modal/Modal";
 
 export const Card = ({ item, favorite, handleFavorite }) => {
-  // const [isOpen, setIsOpen] = useState(false);
-  // const router = useRouter();
   const pathname = usePathname();
-  // const openModal = () => setIsOpen(true);
-
-  // const closeModal = (e) => {
-  //   if (
-  //     e?.target?.alt !== "X" &&
-  //     e?.target?.className !== e?.currentTarget?.className
-  //   )
-  //     return;
-  //   setIsOpen(false);
-  // };
 
   const {
     img,
@@ -41,13 +25,13 @@ export const Card = ({ item, favorite, handleFavorite }) => {
 
   return (
     <li className={styles.styledli}>
-      <Image className={styles.icon}
+      <Image
+        className={styles.icon}
         alt="heart"
         src={favorite?.includes(id) ? ActiveHeart : Heart}
         onClick={() => handleFavorite(id)}
       />
-
-      <Image alt="auto" src={img || photoLink} height="200" width="274"></Image>
+      <Image alt="auto" src={img || photoLink} height="200" width="290"></Image>
 
       <p className={styles.header}>
         {make}
@@ -73,14 +57,8 @@ export const Card = ({ item, favorite, handleFavorite }) => {
         ))}
       </div>
       <Link href={`${pathname}/${id}`}>
-        <Button
-          type={"button"}
-          text={"Learn more"}
-          // onClick={router.push(`${pathname}/${id}`)}
-          longButton
-        />
+        <Button type={"button"} text={"Learn more"} longButton />
       </Link>
-      {/* {isOpen && <Modal onClose={closeModal} item={item} />} */}
     </li>
   );
 };

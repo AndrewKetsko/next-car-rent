@@ -1,14 +1,12 @@
 "use client";
 
-import X from "@/images/x.svg";
 import { Button } from "../Button/Button";
 import styled from "./carInfoModal.module.css";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 export const CarInfoModal = ({ item }) => {
   const {
-    img = "",
+    img,
     photoLink,
     make,
     model,
@@ -26,18 +24,16 @@ export const CarInfoModal = ({ item }) => {
     mileage,
     rentalPrice,
   } = item;
-  const router = useRouter();
 
   return (
-    <>
-      <Image
-        className={styled.closeicon}
-        alt="X"
-        src={X}
-        onClick={() => router.back()}
-      />
+    <div className={styled.container}>
 
-      <Image alt={model} src={img || photoLink} width={300} height={200} />
+      <Image
+        alt={model}
+        src={img || photoLink}
+        width={400}
+        height={270}
+      />
 
       <p className={styled.header}>
         {make}
@@ -111,6 +107,6 @@ export const CarInfoModal = ({ item }) => {
         text={"Rent a car"}
         onClick={() => window.open("tel:+380730000000", "_self")}
       />
-    </>
+    </div>
   );
 };
