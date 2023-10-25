@@ -4,6 +4,7 @@ import Link from "next/link";
 import styled from "./page.module.css";
 import { usePathname } from "next/navigation";
 import { MainNavigation } from "@/components/MainNavigation/MainNavigation";
+import Providers from "@/components/Providers/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,15 +14,16 @@ export const metadata = {
 };
 
 export default function RootLayout(props) {
-
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className={styled.container}>
-          <MainNavigation />
-        </div>
-        {props.children}
-        {props.modal}
+        <Providers>
+          <div className={styled.container}>
+            <MainNavigation />
+          </div>
+          {props.children}
+          {props.modal}
+        </Providers>
       </body>
     </html>
   );
