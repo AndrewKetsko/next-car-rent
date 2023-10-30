@@ -16,20 +16,38 @@ export const nextConfig = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        //authorize user logic !!!
+        const res = await fetch("http://localhost:3000/api/users/login", {
+          method: "POST",
+          body: JSON.stringify(credentials),
+          "content-type": "application/json",
+        });
 
-        if (credentials) {
-          const user = { name: "Some name", email: credentials.email };
-          return user;
-        }
+        if (!res.ok) return null;
 
-        //authorize user logic !!!
+        const user = res.json();
+        return user;
       },
     }),
-    ],
-    pages: {
-        //provide custom SignIn, SignOut, ... pages 
-    }
+  ],
+  pages: {
+    //provide custom SignIn, SignOut, ... pages
+  },
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      if (account.provider === "credentials") return true;
+      const res = await fetch("http://localhost:3000/api/users/register", {
+        method: "POST",
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          avatar: user.image || "",
+          password: profile.sub || 'qwerty',
+        }),
+        "content-type": "application/json",
+      });
+      return true;
+    },
+  },
 };
 
 const handler = NextAuth(nextConfig);

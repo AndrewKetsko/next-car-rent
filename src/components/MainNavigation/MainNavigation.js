@@ -29,7 +29,7 @@ export const MainNavigation = () => {
           >
             Catalog
           </Link>
-        </li>{" "}
+        </li>
         {session?.status === "authenticated" && (
           <li className={styled.linkbox}>
             <Link
@@ -80,6 +80,16 @@ export const MainNavigation = () => {
             </Link>
           </li>
         )}
+        {session?.status !== "authenticated" && <li className={styled.linkbox}>
+          <Link
+            className={`${styled.link} ${
+              pathname === "/register" ? "active" : ""
+            }`}
+            href="/register"
+          >
+            Register
+          </Link>
+        </li>}
       </ul>
     </nav>
   );

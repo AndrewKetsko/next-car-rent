@@ -21,6 +21,7 @@ export default function RootLayout(props) {
           <div className={styled.container}>
             <MainNavigation />
           </div>
+          <div style={{height:'100px'}}></div>
           {props.children}
           {props.modal}
         </Providers>

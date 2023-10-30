@@ -8,11 +8,17 @@ import { favoriteCars, filteredCars } from "@/filters/filters";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-export const Catalog = ({ filter, data }) => {
+export const Catalog = ({ filter, data, favorite=[] }) => {
   const pathname = usePathname();
   const router = useRouter();
-  const favorite = JSON.parse(localStorage.getItem("favorite")) || [];
+  // const { data: session } = useSession();
+  // const [favorite, setFavorite] = useState([]);
+
+
+
+  // const favorite = JSON.parse(localStorage.getItem("favorite")) || [];
   // const [currentPage, setCurrentPage] = useState(1);
 
   // useEffect(() => {
@@ -28,13 +34,13 @@ export const Catalog = ({ filter, data }) => {
   const pages = Math.ceil(favoriteData?.length / 8);
   // const renderData = favoriteData?.slice(0, currentPage * 8);
 
-  const handleFavorite = (id) => {
-    if (favorite.includes(id)) {
-      favorite.splice(favorite.indexOf(id), 1);
-    } else {
-      favorite.push(id);
-    }
-    localStorage.setItem("favorite", JSON.stringify(favorite));
+  const handleFavorite = async (id) => {
+    const res = await fetch("/api/users/favorite", {
+      method: "PATCH",
+      body: JSON.stringify({ id }),
+      "content-type": "application/json",
+    });
+    // localStorage.setItem("favorite", JSON.stringify(favorite));
     router.refresh();
   };
 

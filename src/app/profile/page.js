@@ -6,7 +6,7 @@ export default async function ProfPage() {
   const session = await getServerSession(nextConfig);
   return (
     <>
-      <h2 style={{ marginTop: "100px" }}>Profile of {session?.user?.email}</h2>
+      <h2>Profile of {session?.user?.name}</h2>
       {session?.user?.image && (
         <Image
           alt="profile image"
