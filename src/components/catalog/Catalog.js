@@ -3,28 +3,18 @@
 import styles from "./catalog.module.css";
 
 import { Card } from "../Card/Card";
-import { useEffect, useState } from "react";
 import { favoriteCars, filteredCars } from "@/filters/filters";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import useSWR, { mutate } from "swr";
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export const Catalog = ({ filter, data, favorite=[] }) => {
+export const Catalog = ({ filter, data }) => {
   const pathname = usePathname();
   const router = useRouter();
-  // const { data: session } = useSession();
-  // const [favorite, setFavorite] = useState([]);
-
-
-
-  // const favorite = JSON.parse(localStorage.getItem("favorite")) || [];
-  // const [currentPage, setCurrentPage] = useState(1);
-
-  // useEffect(() => {
-  //   setCurrentPage(1);
-  // }, [pathname]);
-
+  const { data: fav, isLoading } = useSWR("/api/users/favorite", fetcher);
+  const favorite = fav?.favorite;
   const filteredData = filteredCars(data, filter);
 
   const favoriteData = pathname.includes("catalog")
@@ -40,7 +30,7 @@ export const Catalog = ({ filter, data, favorite=[] }) => {
       body: JSON.stringify({ id }),
       "content-type": "application/json",
     });
-    // localStorage.setItem("favorite", JSON.stringify(favorite));
+    mutate("/api/users/favorite");
     router.refresh();
   };
 
@@ -48,7 +38,7 @@ export const Catalog = ({ filter, data, favorite=[] }) => {
   //   setCurrentPage((prev) => prev + 1);
   // };
 
-  return (
+  return isLoading ? null : (
     <>
       {favoriteData?.length === 0 ? (
         <div>

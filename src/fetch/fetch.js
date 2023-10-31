@@ -1,5 +1,9 @@
-export const fetchData =async () => {
-  const res =await fetch("https://65057c21ef808d3c66f016b7.mockapi.io/adverts");
+// const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+export const fetchData = async () => {
+  const res = await fetch(
+    "http://localhost:3000/api/cars"
+  );
   if (!res.ok) return [];
   return res.json();
 };

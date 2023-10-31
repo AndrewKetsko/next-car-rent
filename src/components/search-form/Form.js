@@ -12,9 +12,12 @@ import { Select } from "@/components/Select/Select";
 import styles from "./form.module.css";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export const Form = ({ data }) => {
-  const favorite = [];
+  const { data: fav, isLoading } = useSWR("/api/users/favorite", fetcher);
+  const favorite = fav?.favorite;
   const pathname = usePathname();
   const [model, setModel] = useState("");
   const [price, setPrice] = useState("");

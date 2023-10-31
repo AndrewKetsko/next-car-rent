@@ -1,7 +1,7 @@
 import { fetchData } from "@/fetch/fetch";
 
 export const findedCar = async (id) => {
-  const cars = await fetchData();
+  const { cars: data } = await fetchData();
   return cars.find(car => car.id === +id);
 }
 
@@ -27,7 +27,7 @@ export const filteredCars = (data, filter) => {
 export const favoriteCars = (data, favorite) => {
   return favorite?.length === 0
     ? []
-    : data?.filter((item) => favorite.includes(item.id));
+    : data?.filter((item) => favorite?.includes(item.id));
 };
 
 export const priceRangeCurrentOnly = (data) => [

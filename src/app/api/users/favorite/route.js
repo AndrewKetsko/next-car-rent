@@ -23,14 +23,11 @@ export async function PATCH(req) {
   }
 }
 
-export async function GET(req, res) {
-  try {            console.log('user');
-
-      const { user } = await getServerSession(nextConfig);
-            console.log(user);
+export async function GET() {
+  try {
+    const { user } = await getServerSession(nextConfig);
 
     const { favorite } = await User.findOne({ email: user.email });
-      console.log(favorite);
 
     return NextResponse.json({ favorite }, { status: 200 });
   } catch (error) {
