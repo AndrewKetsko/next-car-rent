@@ -3,7 +3,7 @@ import Image from "next/image";
 import Heart from "@/images/heart.svg";
 import ActiveHeart from "@/images/active.svg";
 import { Button } from "../Button/Button";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export const Card = ({ item, favorite, handleFavorite }) => {
@@ -28,7 +28,7 @@ export const Card = ({ item, favorite, handleFavorite }) => {
       <Image
         className={styles.icon}
         alt="heart"
-        src={favorite?.includes(id) ? ActiveHeart : Heart}
+        src={favorite ? ActiveHeart : Heart}
         onClick={() => handleFavorite(id)}
       />
       <Image alt="auto" src={img || photoLink} height="200" width="290"></Image>

@@ -8,24 +8,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import useSWR, { mutate } from "swr";
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import { fetcher } from "@/fetch/fetch";
 
 export const Catalog = ({ filter, data }) => {
   const pathname = usePathname();
   const router = useRouter();
   const { data: fav, isLoading } = useSWR("/api/users/favorite", fetcher);
   const favorite = fav?.favorite;
+
   const filteredData = filteredCars(data, filter);
 
   const favoriteData = pathname.includes("catalog")
     ? filteredData
     : favoriteCars(filteredData, favorite);
 
-  const pages = Math.ceil(favoriteData?.length / 8);
+  // const pages = Math.ceil(favoriteData?.length / 8);
   // const renderData = favoriteData?.slice(0, currentPage * 8);
 
   const handleFavorite = async (id) => {
-    const res = await fetch("/api/users/favorite", {
+    await fetch("/api/users/favorite", {
       method: "PATCH",
       body: JSON.stringify({ id }),
       "content-type": "application/json",
@@ -61,7 +62,7 @@ export const Catalog = ({ filter, data }) => {
             <Card
               key={item.id}
               item={item}
-              favorite={favorite}
+              favorite={favorite?.includes(item.id)}
               handleFavorite={handleFavorite}
             />
           ))}
