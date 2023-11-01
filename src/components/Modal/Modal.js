@@ -2,7 +2,6 @@
 
 import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
-import styles from './modal.module.css';
 import X from "@/images/x.svg";
 import Image from "next/image";
 
@@ -37,10 +36,17 @@ export default function Modal({ children }) {
   );
 
   return (
-    <div ref={overlay} className={styles.overlay} onClick={onClick}>
-      <div ref={wrapper} className={styles.wrapper}>
+    <div
+      ref={overlay}
+      className="fixed top-0 left-0 z-20 w-screen h-screen bg-[--overlay-color]"
+      onClick={onClick}
+    >
+      <div
+        ref={wrapper}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto bg-white rounded-2xl overflow-hidden"
+      >
         <Image
-          className={styles.closeicon}
+          className="absolute top-4 right-4 w-6 h-6 hover:scale-125 cursor-pointer"
           alt="X"
           src={X}
           onClick={() => router.back()}

@@ -9,7 +9,6 @@ import {
   priceRangePer10,
 } from "@/filters/filters";
 import { Select } from "@/components/Select/Select";
-import styles from "./form.module.css";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
@@ -55,7 +54,10 @@ export const Form = ({ data }) => {
   };
 
   return (
-    <form className={styles.formcontainer} onSubmit={handleSubmit}>
+    <form
+      className="w-screen flex flex-wrap gap-4 justify-center items-end mb-12"
+      onSubmit={handleSubmit}
+    >
       <Select
         data={makes}
         setData={setModel}
@@ -72,10 +74,19 @@ export const Form = ({ data }) => {
         name={"price"}
       />
 
-      <div className={styles.customlabel}>
-        <legend className={styles.labeltext}>Car mileage / km</legend>
+      <div
+        className="text-lg font-medium leading-5 tracking-normal text-[--main-text]
+      before:content-['From:'] before:absolute before:translate-x-4 before:translate-y-[39px]
+      after:content-['To:'] after:absolute after:-translate-x-[140px] after:translate-y-3.5"
+      >
+        <legend className="text-3.5 font-medium leading-5 tracking-normal text-[--form-label-text] mb-2">
+          Car mileage / km
+        </legend>
         <input
-          className={styles.inputtext}
+          className="text-lg font-medium leading-5 tracking-normal text-[--main-text] 
+           bg-[--form-select-bg-color] outline-none 
+          rounded-tl-xl rounded-bl-xl border-r-2 border-r-[#8a8a89]
+          py-3.5 pr-4.5 pl-[75px]"
           name="from"
           type="number"
           min="0"
@@ -84,7 +95,9 @@ export const Form = ({ data }) => {
           onChange={(e) => setFrom(e.target.value)}
         />
         <input
-          className={styles.inputtext}
+          className="text-lg font-medium leading-5 tracking-normal text-[--main-text] 
+          border-none bg-[--form-select-bg-color] outline-none
+          rounded-tr-xl rounded-br-xl py-3.5 pr-4.5 pl-[50px]"
           name="to"
           type="number"
           min="0"

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import styled from "./mainnav.module.css";
 import { usePathname } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
 
@@ -10,19 +9,21 @@ export const MainNavigation = () => {
   const session = useSession();
 
   return (
-    <nav className={styled.navigation}>
-      <ul style={{ display: "flex", width: "100vw" }}>
-        <li className={styled.linkbox}>
+    <nav className="fixed z-50 p-2.5 bg-[--form-select-bg-color] top-0 left-0">
+      <ul className="flex w-screen">
+        <li className="mr-5">
           <Link
-            className={`${styled.link} ${pathname === "/" ? "active" : ""}`}
+            className={`text-4.5 font-semibold leading-5 tracking-normal block py-3.5 px-5 hover:bg-[--button-bg-color-hover] hover:text-white rounded-xl ${
+              pathname === "/" ? "active" : ""
+            }`}
             href="/"
           >
             Home
           </Link>
         </li>
-        <li className={styled.linkbox}>
+        <li className="mr-5">
           <Link
-            className={`${styled.link} ${
+            className={`text-4.5 font-semibold leading-5 tracking-normal block py-3.5 px-5 hover:bg-[--button-bg-color-hover] hover:text-white rounded-xl ${
               pathname === "/catalog" ? "active" : ""
             }`}
             href="/catalog"
@@ -31,9 +32,9 @@ export const MainNavigation = () => {
           </Link>
         </li>
         {session?.status === "authenticated" && (
-          <li className={styled.linkbox}>
+          <li className="mr-5">
             <Link
-              className={`${styled.link} ${
+              className={`text-4.5 font-semibold leading-5 tracking-normal block py-3.5 px-5 hover:bg-[--button-bg-color-hover] hover:text-white rounded-xl ${
                 pathname === "/favorites" ? "active" : ""
               }`}
               href="/favorites"
@@ -43,9 +44,9 @@ export const MainNavigation = () => {
           </li>
         )}
         {session?.status === "authenticated" && (
-          <li className={styled.linkbox}>
+          <li className="mr-5">
             <Link
-              className={`${styled.link} ${
+              className={`text-4.5 font-semibold leading-5 tracking-normal block py-3.5 px-5 hover:bg-[--button-bg-color-hover] hover:text-white rounded-xl ${
                 pathname === "/profile" ? "active" : ""
               }`}
               href="/profile"
@@ -55,9 +56,9 @@ export const MainNavigation = () => {
           </li>
         )}
         {session?.status === "authenticated" ? (
-          <li className={styled.linkbox}>
+          <li className="mr-5">
             <Link
-              className={`${styled.link} ${
+              className={`text-4.5 font-semibold leading-5 tracking-normal block py-3.5 px-5 hover:bg-[--button-bg-color-hover] hover:text-white rounded-xl ${
                 pathname === "/api/auth/signout" ? "active" : ""
               }`}
               href="#"
@@ -69,9 +70,9 @@ export const MainNavigation = () => {
             </Link>
           </li>
         ) : (
-          <li className={styled.linkbox}>
+          <li className="mr-5">
             <Link
-              className={`${styled.link} ${
+              className={`text-4.5 font-semibold leading-5 tracking-normal block py-3.5 px-5 hover:bg-[--button-bg-color-hover] hover:text-white rounded-xl ${
                 pathname === "/api/auth/signin" ? "active" : ""
               }`}
               href="/api/auth/signin"
@@ -80,16 +81,18 @@ export const MainNavigation = () => {
             </Link>
           </li>
         )}
-        {session?.status !== "authenticated" && <li className={styled.linkbox}>
-          <Link
-            className={`${styled.link} ${
-              pathname === "/register" ? "active" : ""
-            }`}
-            href="/register"
-          >
-            Register
-          </Link>
-        </li>}
+        {session?.status !== "authenticated" && (
+          <li className="mr-5">
+            <Link
+              className={`text-4.5 font-semibold leading-5 tracking-normal block py-3.5 px-5 hover:bg-[--button-bg-color-hover] hover:text-white rounded-xl ${
+                pathname === "/register" ? "active" : ""
+              }`}
+              href="/register"
+            >
+              Register
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

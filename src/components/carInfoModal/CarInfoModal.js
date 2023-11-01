@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "../Button/Button";
-import styled from "./carInfoModal.module.css";
 import Image from "next/image";
 
 export const CarInfoModal = ({ item }) => {
@@ -26,16 +25,16 @@ export const CarInfoModal = ({ item }) => {
   } = item;
 
   return (
-    <div className={styled.container}>
-      <Image alt={model} src={img || photoLink} width={400} height={270} />
+    <div className="w-[500px] p-12">
+      <Image alt={model} src={img || photoLink} width={400} height={400} />
 
-      <p className={styled.header}>
+      <p className="text-lg font-medium leading-6 tracking-normal mt-4 mb-1">
         {make}
-        <span style={{ color: "#3470FF" }}> {model}, </span>
+        <span className="text-[--button-bg-color]"> {model}, </span>
         {year}
       </p>
 
-      <div>
+      <div className="divide-x-2">
         {[
           ...address.split(", ").slice(1),
           rentalCompany,
@@ -43,56 +42,90 @@ export const CarInfoModal = ({ item }) => {
           `Year: ${year}`,
           `Type: ${type}`,
         ].map((i) => (
-          <span className={styled.semitransparent} key={i}>
+          <span
+            className="inline-block text-xs leading-6 tracking-normal text-[--semi-transparent] 
+            px-1 first:pl-0 last:pr-0"
+            key={i}
+          >
             {i}
           </span>
         ))}
       </div>
 
-      <div>
+      <div className="divide-x-2">
         {[
           `Fuel Consumption: ${fuelConsumption}`,
           `Engine Size: ${engineSize}`,
         ].map((i) => (
-          <span className={styled.semitransparent} key={i}>
+          <span
+            className="inline-block text-xs leading-6 tracking-normal text-[--semi-transparent] 
+            px-1 first:pl-0 last:pr-0"
+            key={i}
+          >
             {i}
           </span>
         ))}
       </div>
 
-      <p className={styled.text}>{description}</p>
+      <p className="text-sm leading-6 tracking-normal mt-3.5">{description}</p>
 
-      <p className={styled.semiheader}>Accessories and functionalities:</p>
+      <p className="text-sm fomt-medium leading-6 tracking-normal mt-6 mb-1">
+        Accessories and functionalities:
+      </p>
 
-      {[...accessories, ...functionalities].map((i) => (
-        <span className={styled.semitransparent} key={i}>
-          {i}
-        </span>
-      ))}
+      <div className="divide-x-2">
+        {[...accessories, ...functionalities].map((i) => (
+          <span
+            className="inline-block text-xs leading-6 tracking-normal text-[--semi-transparent] 
+            px-1 first:pl-0 last:pr-0"
+            key={i}
+          >
+            {i}
+          </span>
+        ))}
+      </div>
 
-      <p className={styled.semiheader}>Rental Conditions: </p>
+      <p className="text-lg font-medium leading-6 tracking-normal mt-4 mb-1">
+        Rental Conditions:
+      </p>
 
-      <div style={{ marginBottom: "24px" }}>
+      <div className="mb-6">
         {rentalConditions.split("\n").map((cond) =>
           !cond.includes(":") ? (
-            <p className={styled.textbg} key={cond}>
+            <p
+              className="font-xs leading-6 tracking-normal inline-block
+            py-2 px-3.5 bg-[--form-select-bg-color] rounded-full mr-2 mt-2"
+              key={cond}
+            >
               {cond}
             </p>
           ) : (
-            <p className={styled.textbg} key={cond}>
+            <p
+              className="font-xs leading-6 tracking-normal inline-block
+            py-2 px-3.5 bg-[--form-select-bg-color] rounded-full mr-2 mt-2"
+              key={cond}
+            >
               {cond.split(":")[0]} :
-              <span className={styled.spanbg}>{cond.split(":")[1]}</span>
+              <span className="text-[--button-bg-color] font-semibold">
+                {cond.split(":")[1]}
+              </span>
             </p>
           )
         )}
-        <p className={styled.textbg}>
+        <p
+          className="font-xs leading-6 tracking-normal inline-block
+            py-2 px-3.5 bg-[--form-select-bg-color] rounded-full mr-2 mt-2"
+        >
           Mileage :
-          <span className={styled.spanbg}>
+          <span className="text-[--button-bg-color] font-semibold">
             {mileage.toString().split("").toSpliced(-3, 0, ",").join("")}
           </span>
         </p>
-        <p className={styled.textbg}>
-          Price : <span className={styled.spanbg}>{rentalPrice.slice(1)}$</span>
+        <p
+          className="font-xs leading-6 tracking-normal inline-block
+            py-2 px-3.5 bg-[--form-select-bg-color] rounded-full mr-2 mt-2"
+        >
+          Price : <span className="text-[--button-bg-color] font-semibold">{rentalPrice.slice(1)}$</span>
         </p>
       </div>
 
