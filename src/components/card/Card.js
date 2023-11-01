@@ -1,4 +1,3 @@
-import styles from "./card.module.css";
 import Image from "next/image";
 import Heart from "@/images/heart.svg";
 import ActiveHeart from "@/images/active.svg";
@@ -19,44 +18,52 @@ export const Card = ({ item, favorite, handleFavorite }) => {
     address,
     rentalCompany,
     type,
-    id,
+    _id,
     functionalities,
   } = item;
 
   return (
-    <li className={styles.styledli}>
+    <li className="relative w-[290px]">
       <Image
-        className={styles.icon}
+        className="absolute top-3.5 right-3.5 cursor-pointer hover:scale-125"
         alt="heart"
         src={favorite ? ActiveHeart : Heart}
-        onClick={() => handleFavorite(id)}
+        onClick={() => handleFavorite(_id)}
       />
-      <Image alt="auto" src={img || photoLink} height="200" width="290"></Image>
+      <Image
+        className="h-52"
+        alt={model}
+        src={img || photoLink}
+        height="200"
+        width="290"
+      ></Image>
 
-      <p className={styles.header}>
+      <p className="text-base font-medium leading-6 tracking-normal mt-3.5 mb-2 flex">
         {make}
         {(make + model + year).length < 25 && (
-          <span style={{ color: "#3470FF", marginLeft: "5px" }}>{model}</span>
+          <span className="text-[--button-bg-color] ml-1">{model}</span>
         )}
         , {year}
-        <span style={{ display: "inline-block", marginLeft: "auto" }}>
-          {rentalPrice}
-        </span>
+        <span className="inline-block ml-auto">{rentalPrice}</span>
       </p>
 
-      <div style={{ marginBottom: "28px" }}>
+      <div className="mb-7 divide-x-2">
         {[
           ...address.split(", ").slice(1),
           rentalCompany,
           type,
           functionalities[0],
         ].map((i) => (
-          <span className={styles.semitransparent} key={i}>
+          <span
+            className="inline-block text-xs leading-6 tracking-normal text-[--semi-transparent] 
+            px-1 first:pl-0 last:pr-0"
+            key={i}
+          >
             {i}
           </span>
         ))}
       </div>
-      <Link href={`${pathname}/${id}`}>
+      <Link href={`${pathname}/${_id}`}>
         <Button type={"button"} text={"Learn more"} longButton />
       </Link>
     </li>

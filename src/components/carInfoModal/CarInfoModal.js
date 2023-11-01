@@ -27,13 +27,7 @@ export const CarInfoModal = ({ item }) => {
 
   return (
     <div className={styled.container}>
-
-      <Image
-        alt={model}
-        src={img || photoLink}
-        width={400}
-        height={270}
-      />
+      <Image alt={model} src={img || photoLink} width={400} height={270} />
 
       <p className={styled.header}>
         {make}

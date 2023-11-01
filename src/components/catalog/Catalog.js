@@ -1,7 +1,5 @@
 "use client";
 
-import styles from "./catalog.module.css";
-
 import { Card } from "../Card/Card";
 import { favoriteCars, filteredCars } from "@/filters/filters";
 import Link from "next/link";
@@ -39,30 +37,36 @@ export const Catalog = ({ filter, data }) => {
   //   setCurrentPage((prev) => prev + 1);
   // };
 
-  return isLoading ? null : (
+  return isLoading ? (
+    <div>Loading</div>
+  ) : (
     <>
       {favoriteData?.length === 0 ? (
-        <div>
-          <div className={styles.flexdiv}>
+        <div className="text-center">
+          <div>
             Your favorite list is empty or current search returns nothing.
             Select some favorite cars from
           </div>
-          <div className={styles.flexdiv}>
-            <Link className={styles.link} href={"/catalog"}>
+          <div>
+            <Link
+              className="inline-block my-2.5 py-3 px-24 rounded-xl 
+              bg-[--form-select-bg-color] text-[--button-bg-color] 
+              hover:text-[--button-bg-color-hover] hover:underline"
+              href={"/catalog"}
+            >
               CATALOG
             </Link>
-          </div>{" "}
-          <div className={styles.flexdiv}>
-            or change your search parameters.
           </div>
+          <div>or change your search parameters.</div>
         </div>
       ) : (
-        <ul className={styles.container}>
+            <ul className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+        justify-items-center gap-y-8'>
           {favoriteData?.map((item) => (
             <Card
-              key={item.id}
+              key={item._id}
               item={item}
-              favorite={favorite?.includes(item.id)}
+              favorite={favorite?.includes(item._id)}
               handleFavorite={handleFavorite}
             />
           ))}
