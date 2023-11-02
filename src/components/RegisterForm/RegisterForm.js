@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../Button/Button";
+import { Button } from "@/components/Button/Button";
 import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
