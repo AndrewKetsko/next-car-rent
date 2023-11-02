@@ -16,11 +16,14 @@ export const nextConfig = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        const res = await fetch("http://localhost:3000/api/users/login", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          "content-type": "application/json",
-        });
+        const res = await fetch(
+          "https://next-car-rent.vercel.app/api/users/login",
+          {
+            method: "POST",
+            body: JSON.stringify(credentials),
+            "content-type": "application/json",
+          }
+        );
 
         if (!res.ok) return null;
 
@@ -35,16 +38,19 @@ export const nextConfig = {
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === "credentials") return true;
-      const res = await fetch("http://localhost:3000/api/users/register", {
-        method: "POST",
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          avatar: user.image || "",
-          password: profile.sub || 'qwerty',
-        }),
-        "content-type": "application/json",
-      });
+      const res = await fetch(
+        "https://next-car-rent.vercel.app/api/users/register",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+            avatar: user.image || "",
+            password: profile.sub || "qwerty",
+          }),
+          "content-type": "application/json",
+        }
+      );
       return true;
     },
   },
